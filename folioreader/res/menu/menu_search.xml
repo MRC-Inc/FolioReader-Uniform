@@ -9,6 +9,7 @@
         android:title="@string/menu_item_search"
         app:actionViewClass="com.folioreader.ui.view.FolioSearchView"
         app:showAsAction="always|collapseActionView"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
 </menu>

@@ -65,12 +65,13 @@ td, th, tr {
 }
 
 /* List */
-dd, dir, menu, ol, ul { margin-left: 30px !important; }
-ol { list-style-type: decimal !important; }
-li { display: list-item !important; }
+dd, dir, menu, ol, ul { margin-left: 6px !important; line-height: 1.40em !important; text-indent: 1.25em}
+ol { counter-reset: item }
+li { display: block; margin-bottom: 12px !important;}
+li:before { content: counters(item, ".") ". "; counter-increment: item }
 ol ol, ol ul, ul ol, ul ul {
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+    margin-top: 12px !important;
 }
 
 /* Links */
@@ -208,6 +209,11 @@ html.nightMode {
 }
 
 .nightMode p, .nightMode div {
+    color: #767676 !important;
+    background-color: transparent !important;
+}
+
+.nightMode li {
     color: #767676 !important;
     background-color: transparent !important;
 }

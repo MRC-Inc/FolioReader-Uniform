@@ -9,6 +9,7 @@
         android:icon="@drawable/ic_search"
         android:title="@string/menu_item_search"
         app:showAsAction="ifRoom"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
     <item
@@ -16,6 +17,7 @@
         android:icon="@drawable/icon_font"
         android:title="@string/menu_item_config"
         app:showAsAction="ifRoom"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
     <item
@@ -24,6 +26,7 @@
         android:title="@string/menu_item_tts"
         android:visible="false"
         app:showAsAction="ifRoom"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
 </menu>

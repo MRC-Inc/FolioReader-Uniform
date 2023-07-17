@@ -66,8 +66,8 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
     // To get collapseButtonView from toolbar for any click events
     private val toolbarOnLayoutChangeListener: View.OnLayoutChangeListener = object : View.OnLayoutChangeListener {
         override fun onLayoutChange(
-            v: View?, left: Int, top: Int, right: Int, bottom: Int,
-            oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int
+                v: View?, left: Int, top: Int, right: Int, bottom: Int,
+                oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int
         ) {
 
             for (i in 0 until toolbar.childCount) {
@@ -127,7 +127,7 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
         }
 
         spineSize = intent.getIntExtra(BUNDLE_SPINE_SIZE, 0)
-        searchUri = intent.getParcelableExtra(BUNDLE_SEARCH_URI)
+        searchUri = intent.getParcelableExtra(BUNDLE_SEARCH_URI)!!
 
         searchAdapter = SearchAdapter(this)
         searchAdapter.onItemClickListener = this
@@ -155,10 +155,11 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
         Log.v(LOG_TAG, "-> onNewIntent")
 
         if (intent.hasExtra(BUNDLE_SEARCH_URI)) {
-            searchUri = intent.getParcelableExtra(BUNDLE_SEARCH_URI)
+            searchUri = intent.getParcelableExtra(BUNDLE_SEARCH_URI)!!
         } else {
             intent.putExtra(BUNDLE_SEARCH_URI, searchUri)
             intent.putExtra(BUNDLE_SPINE_SIZE, spineSize)
@@ -173,7 +174,7 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
     private fun handleSearch() {
         Log.v(LOG_TAG, "-> handleSearch")
 
-        val query: String = intent.getStringExtra(SearchManager.QUERY)
+        val query: String = intent.getStringExtra(SearchManager.QUERY)!!
         val newDataBundle = Bundle()
         newDataBundle.putString(ListViewType.KEY, ListViewType.PAGINATION_IN_PROGRESS_VIEW.toString())
         newDataBundle.putParcelableArrayList("DATA", ArrayList<SearchLocator>())
@@ -202,8 +203,8 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
 
         val intent = Intent()
         searchAdapterDataBundle.putInt(
-            BUNDLE_FIRST_VISIBLE_ITEM_INDEX,
-            linearLayoutManager.findFirstVisibleItemPosition()
+                BUNDLE_FIRST_VISIBLE_ITEM_INDEX,
+                linearLayoutManager.findFirstVisibleItemPosition()
         )
         intent.putExtra(SearchAdapter.DATA_BUNDLE, searchAdapterDataBundle)
         intent.putExtra(BUNDLE_SAVE_SEARCH_QUERY, searchView.query)
@@ -230,8 +231,8 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
 
         if (savedInstanceState != null) {
             searchView.setQuery(
-                savedInstanceState!!.getCharSequence(BUNDLE_SAVE_SEARCH_QUERY),
-                false
+                    savedInstanceState!!.getCharSequence(BUNDLE_SAVE_SEARCH_QUERY),
+                    false
             )
             softKeyboardVisible = savedInstanceState!!.getBoolean(BUNDLE_IS_SOFT_KEYBOARD_VISIBLE)
             if (!softKeyboardVisible)
@@ -288,9 +289,9 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val itemId = item?.itemId
+        val itemId = item.itemId
 
         if (itemId == R.id.itemSearch) {
             Log.v(LOG_TAG, "-> onOptionsItemSelected -> ${item.title}")
@@ -302,8 +303,8 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(
-        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
-        viewHolder: RecyclerView.ViewHolder, position: Int, id: Long
+            adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
+            viewHolder: RecyclerView.ViewHolder, position: Int, id: Long
     ) {
 
         if (adapter is SearchAdapter) {
@@ -312,8 +313,8 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
 
                 val intent = Intent()
                 searchAdapterDataBundle.putInt(
-                    BUNDLE_FIRST_VISIBLE_ITEM_INDEX,
-                    linearLayoutManager.findFirstVisibleItemPosition()
+                        BUNDLE_FIRST_VISIBLE_ITEM_INDEX,
+                        linearLayoutManager.findFirstVisibleItemPosition()
                 )
                 intent.putExtra(SearchAdapter.DATA_BUNDLE, searchAdapterDataBundle)
                 intent.putExtra(FolioActivity.EXTRA_SEARCH_ITEM, viewHolder.searchLocator as Parcelable)

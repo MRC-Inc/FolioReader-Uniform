@@ -95,9 +95,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_offline_gray_layer_list"
-            android:text="offline"
+            android:drawablePadding="8dp"
+            android:text="Нет связи"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -110,7 +110,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/round_button"
             android:padding="8dp"
-            android:text="Google search"
+            android:text="Google поиск"
             android:visibility="gone"
             tools:visibility="visible" />
 
